@@ -1,0 +1,47 @@
+[System]
+Name='car_steer'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='distance'
+Range=[-10 10]
+NumMFs=3
+MF1='left':'trapmf',[-10 -10 -8 -2]
+MF2='right':'trapmf',[2 8 10 10]
+MF3='zero':'trimf',[-6 0 6]
+
+[Input2]
+Name='delta'
+Range=[-5 5]
+NumMFs=3
+MF1='left':'trapmf',[-5 -5 -4 -0.5]
+MF2='zero':'trimf',[-3 0 3]
+MF3='right':'trapmf',[0.5 4 5 5]
+
+[Output1]
+Name='steer'
+Range=[-1 1]
+NumMFs=3
+MF1='left':'trapmf',[-1 -1 -0.8 -0.1]
+MF2='right':'trapmf',[0.1 0.8 1 1]
+MF3='zero':'trimf',[-0.6 0 0.6]
+
+[Rules]
+1 1, 2 (1) : 1
+1 2, 2 (1) : 1
+1 3, 3 (1) : 1
+2 1, 3 (1) : 1
+2 2, 1 (1) : 1
+2 3, 1 (1) : 1
+3 1, 2 (1) : 1
+3 2, 3 (1) : 1
+3 3, 1 (1) : 1
